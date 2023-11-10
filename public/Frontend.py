@@ -8,9 +8,9 @@ from pages.page3 import RestaurantA as RC
 
 # Mock data for restaurants
 restaurants_data = [
-    {"id": 1, "name": "Restaurant A", "image_path": "./public/r1.jpg"},
-    {"id": 2, "name": "Restaurant B", "image_path": "./public/r2.jpg"},
-    {"id": 3, "name": "Restaurant C", "image_path": "./public/r3.jpg"},
+    {"id": 1, "name": "Restaurant A", "image_path": "./r1.jpg"},
+    {"id": 2, "name": "Restaurant B", "image_path": "./r2.jpg"},
+    {"id": 3, "name": "Restaurant C", "image_path": "./r3.jpg"},
 ]
 
 # Streamlit app
