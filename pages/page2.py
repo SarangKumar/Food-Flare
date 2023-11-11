@@ -2,5 +2,5 @@ import streamlit as st
 
 st.balloons()
 
-def RestaurantA():
+def RestaurantB():
     st.title("Restaurant B")
