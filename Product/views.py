@@ -50,3 +50,7 @@ class OrderDetailView(DetailView):
 def order_conform(self):
     return render(self, 'Product/thanks.html')
 
+def hello(self):
+    model = Product.objects.all().filter(slug = 'Fastfood').first()
+    print(model)
+    return render(self, 'Product/hello.html', {'food': model})
