@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django import forms
-from .models import Product, Order
+from .models import Product, Order, Item
+
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -15,5 +16,9 @@ class OrderAdmin(admin.ModelAdmin):
     readonly_fields = ['slug','order_by', 'created', 'last_updated',]
 
 admin.site.register(Order, OrderAdmin)
+
+class ItemAdmin(admin.ModelAdmin):
+    list_display = ['item_id','item_name','item_desc','item_price','item_image',]
+admin.site.register(Item,ItemAdmin)
 
 

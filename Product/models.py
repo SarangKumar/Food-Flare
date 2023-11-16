@@ -5,6 +5,8 @@ from django.conf import settings
 from django_extensions.db import fields as extension_fields
 from django.utils import timezone
 from django_currentuser.db.models import CurrentUserField
+
+
 class Product(models.Model):
 
     # Fields
@@ -32,7 +34,6 @@ class Product(models.Model):
 
 
 class Order(models.Model):
-
     # Fields
     name = models.CharField(max_length=255)
     contact = models.CharField(max_length=10, null=True, blank=True)
@@ -70,3 +71,21 @@ class Order(models.Model):
             if not self.delivered_on:
                 self.delivered_on = timezone.now()
         super(Order, self).save(*args, **kwargs)
+
+
+class Item(models.Model):
+    item_id = models.CharField(max_length=3)
+    item_name = models.CharField(max_length=15)
+    item_desc = models.CharField(max_length=100)
+    item_price = models.FloatField(blank=True,null=True)
+    item_image = models.ImageField(upload_to="media/Product-images/", null=True, blank=True)
+
+    def __str__(self):
+        return u'%s' % self.item_name
+    
+    def get_absolute_url(self):
+        return reverse('Product_Item_detail', args=(self.item_name,))
+
+
+    def get_update_url(self):
+        return reverse('Product_Item_update', args=(self.item_name,))
