@@ -18,12 +18,13 @@ class Product(models.Model):
     description = models.TextField(blank=True, null=True)
     price = models.FloatField(blank=True, null=True)
     image = models.ImageField(upload_to="media/Product-images/", null=True, blank=True)
+    Rest_id = models.CharField(max_length=3,unique=True)
 
     class Meta:
         ordering = ('category', '-created',)
 
     def __str__(self):
-        return u'%s' % self.slug
+        return u'%s' % self.Rest_id
 
     def get_absolute_url(self):
         return reverse('Product_product_detail', args=(self.slug,))
@@ -79,6 +80,7 @@ class Item(models.Model):
     item_desc = models.CharField(max_length=100)
     item_price = models.FloatField(blank=True,null=True)
     item_image = models.ImageField(upload_to="media/Product-images/", null=True, blank=True)
+    link_id = models.ForeignKey(Product,to_field='Rest_id',blank=True,null=True,on_delete=models.CASCADE)
 
     def __str__(self):
         return u'%s' % self.item_name
