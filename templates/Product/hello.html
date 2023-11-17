@@ -1,16 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello</title>
-</head>
-<body>
-    <h1>Hello</h1>
-    {% if food %}
-        <img src="{{ food.image.url }}" alt="Food Image">
-    {% else %}
-        <p>No image available</p>
-    {% endif %}
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+{% block nav_home %} active {% endblock nav_home %}
+{% block content %}
+
+<!-- Base.html -->
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 mx-5 g-4">
+    {% for object in object_list %}
+
+
+        <div class="col">
+            <div class="card shadow">
+                {% if object.image %}
+                <img src="{{object.image.url}}" style="aspect-ratio: 2;background-size: cover;" class="card-img-top cover" alt="{{object.name}}" width="300px" >
+                {% endif %}
+              <div class="card-body h-20" style="height:14rem; display:flex; align-items:start; flex-direction:column; justify-content:space-between">
+                <div>
+                    <h5 class="card-title">{{object.name}}</h5>
+                    <p class="card-text">{{object.description | truncatewords:50}}</p>
+                </div>
+                <a href="{% url 'Product_Item' object.slug %}" class="btn btn-primary">Order Now</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+    </div>
+{% comment %} </div> {% endcomment %}
+<br>
+<br>
+<br>
+<br>
+{% endblock %}
