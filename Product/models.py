@@ -76,14 +76,14 @@ class Order(models.Model):
 
 class Item(models.Model):
     item_id = models.CharField(max_length=3)
-    item_name = models.CharField(max_length=15)
+    item_name = models.CharField(max_length=100)
     item_desc = models.CharField(max_length=100)
     item_price = models.FloatField(blank=True,null=True)
     item_image = models.ImageField(upload_to="media/Product-images/", null=True, blank=True)
     link_id = models.ForeignKey(Product,to_field='Rest_id',blank=True,null=True,on_delete=models.CASCADE)
 
     def __str__(self):
-        return u'%s' % self.item_name
+        return str(self.id)
     
     def get_absolute_url(self):
         return reverse('Product_Item_detail', args=(self.item_name,))

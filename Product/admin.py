@@ -18,7 +18,8 @@ class OrderAdmin(admin.ModelAdmin):
 admin.site.register(Order, OrderAdmin)
 
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ['item_id','item_name','item_desc','item_price','item_image',]
+    list_display = ['item_id','item_name','item_desc','item_price','item_image','link_id']
+    
 admin.site.register(Item,ItemAdmin)
 
 

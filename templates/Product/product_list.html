@@ -5,27 +5,34 @@
 
 <!-- Base.html -->
 
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 mx-5 g-4">
+<div class="row">
     {% for object in object_list %}
-
-
-        <div class="col">
-            <div class="card shadow">
+        <div class="col-md-3 text-center">
+            <div class="card" style="width: 18rem; margin-top:10px">
                 {% if object.image %}
-                <img src="{{object.image.url}}" style="aspect-ratio: 2;background-size: cover;" class="card-img-top cover" alt="{{object.name}}" width="300px" >
+                    <img src="{{object.image.url}}" class="card-img-top" alt="{{object.name}}" width="350px" min-height="350px">
                 {% endif %}
-              <div class="card-body h-20" style="height:14rem; display:flex; align-items:start; flex-direction:column; justify-content:space-between">
-                <div>
-                    <h5 class="card-title">{{object.name}}</h5>
-                    <p class="card-text">{{object.description | truncatewords:50}}</p>
-                </div>
-                <a href="{% url 'Product_product_detail' object.slug %}" class="btn btn-primary">Order Now</a>
+              <div class="card-body">
+                <h5 class="card-title">{{object.name | truncatewords:5}}</h5>
+                <p class="card-text">{{object.category | default:"-" }}</p>
+                <p class="card-text">{{object.description | truncatewords:10}}</p>
+                <a href="/hello" class="btn btn-primary">Order Now</a>
               </div>
             </div>
-          </div>
-        {% endfor %}
-    </div>
-{% comment %} </div> {% endcomment %}
+        </div>
+    {% endfor %}
+</div>
+
+
+
+
+
+
+
+
+
+
+
 <br>
 <br>
 <br>

@@ -1,5 +1,5 @@
 from django.views.generic import DetailView, ListView, UpdateView, CreateView, TemplateView
-from .models import Product, Order
+from .models import Product, Order, Item
 from .forms import OrderForm
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
@@ -51,6 +51,7 @@ def order_conform(self):
     return render(self, 'Product/thanks.html')
 
 def hello(self):
-    model = Product.objects.all().filter(slug = 'Fastfood').first()
-    print(model)
-    return render(self, 'Product/hello.html', {'food': model})
+    model = Item.objects.all()
+    for item in model:
+        print(item.link_id, item.item_price)
+    return render(self, 'Product/hello.html', {'object_list': model})
