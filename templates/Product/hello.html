@@ -3,11 +3,6 @@
 {% block nav_home %} active {% endblock nav_home %}
 {% block content %}
 
- {% comment %} {% if food %}
-<img src="{{ food.image.url }}" alt="Food Image">
-{% else %}
-<p>No image available</p> {% endcomment %}
-
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
  
 {% for object in object_list %}
@@ -32,4 +27,30 @@
 
 {% endfor %}
 </div>
+
+<script>
+  const buyButtons = document.querySelectorAll('.buy-btn');
+  buyButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const parentDiv = button.parentNode;
+      const quantityForm = parentDiv.querySelector('.quantity-form');
+      quantityForm.style.display = 'block';
+    });
+
+    
+    const cancelButtons = document.querySelectorAll('.cancel-purchase');
+    cancelButtons.forEach(cancelButton => {
+      cancelButton.addEventListener('click', () => {
+        const parentDiv = cancelButton.parentNode;
+
+       // console.log(parentDiv);
+        const quantity = parentDiv.querySelector('.quantity-input');
+        quantity.value = 1;
+       //const quantityForm = parentDiv.querySelector('.quantity-form');
+       parentDiv.style.display = 'none';
+      });
+    });
+  });
+</script>
+
 {% endblock %}
