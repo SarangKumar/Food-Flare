@@ -44,6 +44,12 @@
             <li class="nav-item">
               <a class="nav-link " href="{% url 'logout' %}">Logout</a>
             </li>
+            <!-- Cart link or button -->
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#cartModal">
+              Cart <span class="badge badge-pill badge-primary">0</span>
+            </a>
+          </li>
           {% else %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'login' %}">Login</a>
@@ -53,12 +59,7 @@
             </li>
           {% endif %}
 
-          <!-- Cart link or button -->
-          <li class="nav-item">
-            <a class="nav-link" href="#" data-toggle="modal" data-target="#cartModal">
-              Cart <span class="badge badge-pill badge-primary">0</span>
-            </a>
-          </li>
+          
         </ul>
       </div>
     </nav><br>

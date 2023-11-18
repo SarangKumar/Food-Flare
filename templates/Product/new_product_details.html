@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <!-- {{item_id}} -->
+    <!-- {{object.id}} -->
+    <!-- {{object.item_desc}} -->
+    <!-- {{object.item_id}} -->
+    <!-- {{object.item_image}} -->
+    <!-- {{object.item_name}} -->
+    <!-- {{object.item_price}} -->
+    <!-- {{object.link_id}} -->
+    <!-- {{object.link_id_id}} -->
+    <!-- <p>{{object}}</p> -->
+   
+     <div class="row">
+        <div class="col-md-6">
+
+            <img src="{{object.item_image.url}}" class="card-img-top" alt="...">
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Product : {{object.item_name}}</b></li>
+                <li class="list-group-item"><b> Description </b> {{object.item_desc}}</li>
+                <li class="list-group-item"><b> Price </b> {{object.item_price}}/-</li>
+                <button class="btn btn-primary">Pay Now</button>
+              </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
