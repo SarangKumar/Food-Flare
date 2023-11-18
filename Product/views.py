@@ -50,12 +50,6 @@ class OrderDetailView(DetailView):
 def order_conform(self):
     return render(self, 'Product/thanks.html')
 
-# def hello(self):
-#     model = Item.objects.all()
-#     for item in model:
-#         print(item.link_id, item.item_price)
-#     return render(self, 'Product/hello.html', {'object_list': model})
-
 
 def restaurant(request, r):
     r = r.upper()
