@@ -53,7 +53,7 @@ def order_conform(self):
 
 def restaurant(request, r):
     r = r.upper()
-    print(r)
+    # print(r)
     
     model = Item.objects.filter(link_id=r)
     print(model)

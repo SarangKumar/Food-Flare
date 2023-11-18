@@ -3,33 +3,55 @@
 {% block nav_home %} active {% endblock nav_home %}
 {% block content %}
 
- {% comment %} {% if food %}
-<img src="{{ food.image.url }}" alt="Food Image">
-{% else %}
-<p>No image available</p> {% endcomment %}
-
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
- 
-{% for object in object_list %}
-{% comment %} {{object.name}} {% endcomment %}
-
-<div class="col">
-  <div class="card">
-    {% if object.item_image %}
-    <img src="{{object.item_image.url}}" class="card-img-left" style="width:100%;height:100%;background-size:cover;"
-    alt="{{object.name}}" width="350px" min-height="350px">
-  {% endif %}
-    <div class="card-body">
-      <h5 class="card-title">{{object.item_name}}</h5>
-      <p class="card-text">{{object.item_desc}}</p>
-      <div>
-        <button type="button" name="" id="" class="btn btn-outline-primary">₹ {{object.item_price}}/-</button>
-        <button type="button" name="" class="btn btn-primary">Buy Now</button>
+  {% for object in object_list %}
+    <div class="col">
+      <div class="card">
+        {% if object.item_image %}
+          <img src="{{ object.item_image.url }}" class="card-img-left" style="width:100%;height:100%;background-size:cover;" alt="{{ object.name }}" width="350px" min-height="350px">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ object.item_name }}</h5>
+          <p class="card-text">{{ object.item_desc }}</p>
+          <div>
+            <p>Price: ₹ {{ object.item_price }}/-</p>
+            <button type="button" class="btn btn-primary buy-btn">Buy Now</button>
+            <form class="quantity-form" method="post" action="" style="display: none;">
+              {% csrf_token %} 
+              <input type="number" name="quantity" class="quantity-input" min="1" value="1">
+              <input type="submit" value="Purchase" class="btn btn-success">
+              <button class="btn btn-warning cancel-purchase" type="button" >Cancel</button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  {% endfor %}
 </div>
 
-{% endfor %}
-</div>
+<script>
+  const buyButtons = document.querySelectorAll('.buy-btn');
+  buyButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const parentDiv = button.parentNode;
+      const quantityForm = parentDiv.querySelector('.quantity-form');
+      quantityForm.style.display = 'block';
+    });
+
+    
+    const cancelButtons = document.querySelectorAll('.cancel-purchase');
+    cancelButtons.forEach(cancelButton => {
+      cancelButton.addEventListener('click', () => {
+        const parentDiv = cancelButton.parentNode;
+
+       // console.log(parentDiv);
+        const quantity = parentDiv.querySelector('.quantity-input');
+        quantity.value = 1;
+       //const quantityForm = parentDiv.querySelector('.quantity-form');
+       parentDiv.style.display = 'none';
+      });
+    });
+  });
+</script>
+
 {% endblock %}
