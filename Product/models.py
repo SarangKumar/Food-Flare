@@ -83,7 +83,7 @@ class Item(models.Model):
     link_id = models.ForeignKey(Product,to_field='Rest_id',blank=True,null=True,on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.id)
+        return str(self.item_id)
     
     def get_absolute_url(self):
         return reverse('Product_Item_detail', args=(self.item_name,))

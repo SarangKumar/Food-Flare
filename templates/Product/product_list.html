@@ -15,8 +15,8 @@
               <div class="card-body">
                 <h5 class="card-title">{{object.name | truncatewords:5}}</h5>
                 <p class="card-text">{{object.category | default:"-" }}</p>
-                <p class="card-text">{{object.description | truncatewords:10}}</p>
-                <a href="/hello" class="btn btn-primary">Order Now</a>
+                <p class="card-text">{{objecht.description | truncatewords:10}}</p>
+                <a href="/restaurant/{{object.Rest_id}}" class="btn btn-primary">Order Now</a>
               </div>
             </div>
         </div>

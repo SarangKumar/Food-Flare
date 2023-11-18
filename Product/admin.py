@@ -5,7 +5,7 @@ from .models import Product, Order, Item
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['category', 'name', 'description', 'price','created', 'last_updated',]
+    list_display = ['category', 'name', 'description', 'price','created', 'last_updated','Rest_id']
     readonly_fields = ['slug', 'created', 'last_updated',]
 
 admin.site.register(Product, ProductAdmin)
