@@ -7,59 +7,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-   <style>
-    body {
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+      body {
         background-image: url("{% static 'media\Product-images\Background.jpg' %}");
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
-    }
+      }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>Online Shopping</title>
   </head>
   <body>
-  <nav class="navbar navbar-expand-lg px-4 navbar-dark bg-dark">
-  <!-- Navbar content -->
-    <a class="navbar-brand" href="/">Food Flare</a>
-  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button> -->
-  <div class="collapse navbar-collapse" id="navbarText">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link {% block nav_home %}{% endblock nav_home %}" href="/">Home <span class="sr-only">(current)</span></a>
-      </li>
-      {% if user.is_authenticated %}
-      <li class="nav-item">
-        <a class="nav-link {% block nav_order %}{% endblock nav_order %}" href="{% url 'Product_order_list' %}">My Orders</a>
-      </li>
-      {% endif %}
+    <nav class="navbar navbar-expand-lg px-4 navbar-dark bg-dark">
+      <!-- Navbar content -->
+      <a class="navbar-brand" href="/">Food Flare</a>
+      
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link {% block nav_home %}{% endblock nav_home %}" href="/">Home <span class="sr-only">(current)</span></a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link {% block nav_order %}{% endblock nav_order %}" href="{% url 'Product_order_list' %}">My Orders</a>
+          </li>
+          {% endif %}
+        </ul>
+        
+        <ul class="nav justify-content-end">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">{{ user.username }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="{% url 'logout' %}">Logout</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+            </li>
+          {% endif %}
 
-    </ul>
-    <ul class="nav justify-content-end">
+          <!-- Cart link or button -->
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#cartModal">
+              Cart <span class="badge badge-pill badge-primary">0</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav><br>
 
-      {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">{{user.username}}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="{% url 'logout' %}">Logout</a>
-        </li>
-      {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'login' %}">Login</a>
-        </li>
+    <!-- Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="cartModalLabel">Your Cart</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="cartItems">
+            <!-- Cart items will be displayed here -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
-        </li>
-      {% endif %}
-
-    </ul>
-  </div>
-  </nav><br>
     <div class="container-fluid">
       {% block content %}{% endblock content %}
     </div>
@@ -68,10 +91,47 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-    
-    {% comment %} old bootstrap v4 {% endcomment %}
+
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- Add this script at the end of the body -->
+    <script>
+      $(document).ready(function () {
+         // Function to update cart modal content
+         function updateCartModal(cartItems) {
+            var cartItemsHtml = '';
+
+            // Iterate through cart items and create HTML
+            for (var i = 0; i < cartItems.length; i++) {
+               cartItemsHtml += '<p>' + cartItems[i] + '</p>';
+            }
+
+            // Update the modal body with the cart items HTML
+            $('#cartItems').html(cartItemsHtml);
+         }
+
+         // Trigger the updateCartModal function when the modal is shown
+         $('#cartModal').on('shown.bs.modal', function (e) {
+            // For simplicity, using a static array to simulate cart items
+            var sampleCartItems = ['Item 1', 'Item 2', 'Item 3'];
+            updateCartModal(sampleCartItems);
+         });
+
+         // Example: Add item to cart (you'll need to customize this based on your logic)
+         $('.add-to-cart-btn').click(function () {
+            // Perform the logic to add the item to the cart
+            // ...
+
+            // For simplicity, just adding a static item to the cart array
+            sampleCartItems.push('New Item');
+
+            // After adding the item, update the cart modal
+            updateCartModal(sampleCartItems);
+         });
+      });
+    </script>
+  </body>
 </html>

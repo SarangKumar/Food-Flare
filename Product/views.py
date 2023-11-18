@@ -4,6 +4,10 @@ from .forms import OrderForm
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .models import CartItem
+from .forms import CartItemForm
 
 
 
@@ -60,3 +64,29 @@ def restaurant(request, r):
     for item in model:
         print(item.link_id, item.item_price)
     return render(request, 'Product/hello.html', {'object_list': model})
+
+
+@login_required
+def view_cart(request):
+    cart_items = CartItem.objects.filter(user=request.user)
+    return render(request, 'Product/cart.html', {'cart_items': cart_items})
+
+@login_required
+def add_to_cart(request, product_id):
+    '''product = get_object_or_404(Product, pk=product_id)
+    form = CartItemForm(request.POST or None, initial={'product': product})
+
+    if request.method == 'POST' and form.is_valid():
+        quantity = form.cleaned_data['quantity']
+        existing_item = CartItem.objects.filter(user=request.user, product=product).first()
+
+        if existing_item:
+            existing_item.quantity += quantity
+            existing_item.save()
+        else:
+            CartItem.objects.create(user=request.user, product=product, quantity=quantity)
+
+        return redirect('view_cart')'''
+    form = 'Sanjay'
+    product = 'SE'
+    return render(request, 'Product/add_to_cart.html', {'form': form, 'product': product})

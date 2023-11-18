@@ -5,6 +5,8 @@ from django.conf import settings
 from django_extensions.db import fields as extension_fields
 from django.utils import timezone
 from django_currentuser.db.models import CurrentUserField
+from django.db import models
+from django.contrib.auth.models import User
 
 
 class Product(models.Model):
@@ -91,3 +93,18 @@ class Item(models.Model):
 
     def get_update_url(self):
         return reverse('Product_Item_update', args=(self.item_name,))
+
+
+class CartItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return str(self.user)
+    
+    def get_absolute_url(self):
+        return reverse('add_to_cart',args = (self.user,))
+    
+    def get_update_url(self):
+        return reverse('add_to_cart',args=(self.user,))

@@ -20,11 +20,11 @@
     alt="{{object.name}}" width="350px" min-height="350px">
   {% endif %}
     <div class="card-body">
-      <h5 class="card-title">{{object.item_name}}</h5>
-      <p class="card-text">{{object.item_desc}}</p>
+      <h5 class="card-title">{{ object.item_name }}</h5>
+      <p class="card-text">{{ object.item_desc }}</p>
       <div>
-        <button type="button" name="" id="" class="btn btn-outline-primary">₹ {{object.item_price}}/-</button>
-        <button type="button" name="" class="btn btn-primary">Buy Now</button>
+        <button type="button" class="btn btn-outline-primary">₹ {{ object.item_price }}/-</button>
+        <button type="button" class="btn btn-primary add-to-cart-btn">Add to Cart</button>
       </div>
     </div>
   </div>

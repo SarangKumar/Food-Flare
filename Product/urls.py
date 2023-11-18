@@ -15,5 +15,7 @@ urlpatterns = (
     path('order/conformed/', views.order_conform, name='Product_order_conform'),
     path('order/create/<slug:slug>', views.OrderCreateView.as_view(), name='Product_order_create'),
     path('order/detail/<slug:slug>/', views.OrderDetailView.as_view(), name='Product_order_detail'),
+    path('cart/', views.view_cart, name='view_cart'),
+    path('add_to_cart/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
 )
 

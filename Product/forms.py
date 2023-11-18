@@ -1,6 +1,11 @@
 from django import forms
 from .models import Product, Order
+from django import forms
 
+class CartItemForm(forms.Form):
+    quantity = forms.IntegerField(
+        min_value=1, initial=1, widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Quantity'})
+        )
 
 
 class OrderForm(forms.ModelForm):

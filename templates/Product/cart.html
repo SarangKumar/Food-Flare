@@ -1,0 +1,4 @@
+<h2>Your Cart</h2>
+{% for item in cart_items %}
+    {{ item.product.name }} - Quantity: {{ item.quantity }}
+{% endfor %}
