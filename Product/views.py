@@ -49,7 +49,11 @@ class OrderCreateView(CreateView):
 @method_decorator(login_required, name='dispatch')
 class OrderDetailView(DetailView):
     model = Order
+    
 
+# def OrderDetailView(request, slug):
+    # item = Item.objects.get(slug=slug)
+    # return render(request, 'Product/order_detail.html')
 
 def order_conform(self):
     return render(self, 'Product/thanks.html')
@@ -90,3 +94,10 @@ def add_to_cart(request, product_id):
     form = 'Sanjay'
     product = 'SE'
     return render(request, 'Product/add_to_cart.html', {'form': form, 'product': product})
+
+def NewProductDetailView(request, itemid):
+  
+    object = Item.objects.filter(item_id=itemid).first()
+    print(object)
+    # return HttpRespons(request, object)
+    return render(request, 'Product/new_product_details.html', {'object': object})
